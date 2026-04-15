@@ -176,13 +176,11 @@ button {
   color: rgba(255, 250, 252, 0.55);
   transform: translateY(8px);
   opacity: 0;
-  transition: opacity 0.7s ease, transform 0.7s ease, color 0.7s ease;
+  animation: revealLine 0.85s ease forwards;
 }
 
-.letter-line.visible {
-  opacity: 1;
-  transform: translateY(0);
-  color: rgba(255, 250, 252, 0.95);
+.letter-line:last-child {
+  margin-bottom: 0;
 }
 
 .seal {
@@ -284,6 +282,7 @@ button {
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 
 .choice:hover,
@@ -304,7 +303,8 @@ button {
   background: rgba(255, 255, 255, 0.1);
   color: #fff3f7;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  transition: left 0.45s ease, top 0.45s ease, transform 0.22s ease;
+  animation: wander 4.5s ease-in-out infinite;
+  transition: transform 0.22s ease;
 }
 
 .microcopy {
@@ -319,12 +319,19 @@ button {
 }
 
 .popup-backdrop {
-  display: grid;
+  display: none;
   place-items: center;
   padding: 18px;
   background: rgba(12, 4, 12, 0.52);
   backdrop-filter: blur(10px);
   pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+}
+
+.popup-backdrop:target {
+  display: grid;
 }
 
 .popup {
@@ -442,6 +449,39 @@ button {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes revealLine {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    color: rgba(255, 250, 252, 0.55);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    color: rgba(255, 250, 252, 0.95);
+  }
+}
+
+@keyframes wander {
+  0%,
+  100% {
+    left: 72%;
+    top: 40%;
+  }
+  25% {
+    left: 84%;
+    top: 52%;
+  }
+  50% {
+    left: 60%;
+    top: 25%;
+  }
+  75% {
+    left: 78%;
+    top: 68%;
   }
 }
 
